@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Jugadores</title>
+</head>
+<body>
+    <h1>Listado de Jugadores</h1>
+
+    <ul>
+        {% for jugador in jugadores %}
+            <li>
+                {{ jugador.nombre }} {{ jugador.apellido1 }} {{ jugador.apellido2 }} - {{ jugador.equipo }} - {{ jugador.telefono }}
+                <a href="{% url 'torremolinosSport:jugador_detalle' pk=jugador.pk %}">Detalle</a>
+                <a href="{% url 'torremolinosSport:jugador_update' pk=jugador.pk %}">Editar</a>
+                <form action="{% url 'torremolinosSport:jugador_delete' pk=jugador.pk %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit">Eliminar</button>
+                </form>
+            </li>
+        {% empty %}
+            <li>No hay jugadores registrados.</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'torremolinosSport:jugador_create' %}">Añadir Jugador</a>
+</body>
+</html>

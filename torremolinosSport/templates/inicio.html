@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>Página de inicio</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <h1>Título de la página de inicio</h1>
+    
+    <!-- Menú de navegación -->
+    <ul>
+        <li><a href="{% url 'torremolinosSport:deportes' %}">Deportes</a></li>
+        <li><a href="{% url 'torremolinosSport:instalaciones' %}">Instalaciones</a></li>
+        <li><a href="{% url 'torremolinosSport:equipos' %}">Equipos</a></li>
+        <li><a href="{% url 'torremolinosSport:jugadores' %}">Jugadores</a></li>
+        <li><a href="{% url 'torremolinosSport:partidos' %}">Partidos</a></li>
+    </ul>
+
+    <!-- Imagen de deporte -->
+    <img src="{% static 'img/deporte.jpg' %}" alt="Imagen de deporte">
+
+    <!-- Listado de los últimos cinco partidos jugados -->
+    <h2>Últimos partidos jugados</h2>
+    <ul>
+        {% for partido in ultimos_partidos %}
+            <li>{{ partido }}</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Listado de los próximos cinco partidos por jugar -->
+    <h2>Próximos partidos por jugar</h2>
+    <ul>
+        {% for partido in proximos_partidos %}
+            <li>{{ partido }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{% block cuerpo %}
+<form method="POST">
+{% csrf_token %}
+<p>¿Desea eliminar a '{{ object.nombre }}'?</p>
+<input type="Submit" value="Borrar" />
+<a href="{% url 'ejemplo:lista' %}"><input
+    type="button" value="Cancelar"></a>
+</form>
+{% endblock %}

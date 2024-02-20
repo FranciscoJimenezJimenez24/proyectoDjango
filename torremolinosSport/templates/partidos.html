@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Partidos</title>
+</head>
+<body>
+    <h1>Listado de Partidos</h1>
+
+    <ul>
+        {% for partido in partidos %}
+            <li>
+                {{ partido.fecha_hora }} - {{ partido.id_deporte }} - {{ partido.id_local }} vs {{ partido.id_visitante }} - {{ partido.puntos_local }}-{{ partido.puntos_visitante }}
+                <a href="{% url 'torremolinosSport:partido_detalle' pk=partido.pk %}">Detalle</a>
+                <a href="{% url 'torremolinosSport:partido_update' pk=partido.pk %}">Editar</a>
+                <a href="{% url 'torremolinosSport:partido_delete' pk=partido.pk %}">Borrar</a>
+                {% comment %} <form action="{% url 'torremolinosSport:partido_delete' pk=partido.pk %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit">Eliminar</button>
+                </form> {% endcomment %}
+            </li>
+        {% empty %}
+            <li>No hay partidos registrados.</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'torremolinosSport:partido_create' %}">Añadir Partido</a>
+</body>
+</html>
