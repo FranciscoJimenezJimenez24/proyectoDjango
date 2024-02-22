@@ -13,13 +13,14 @@
 
     <ul>
         {% for instalacion in instalaciones %}
-            <li>{{ instalacion.nombre }}
+            <li>{{ instalacion.id_instalacion }}
+                {{ instalacion.nombre }} 
+                {{ instalacion.direccion }} 
+                {{ instalacion.iluminacion }} 
+                {{ instalacion.cubierta }} 
                 <a href="{% url 'torremolinosSport:instalacion_update' pk=instalacion.id_instalacion %}">Editar</a>
-                <form action="{% url 'torremolinosSport:instalacion_delete' pk=instalacion.id_instalacion %}" method="post" style="display: inline;">
-                    {% csrf_token %}
-                    <button type="submit">Eliminar</button>
-                </form>
-            </li>
+                <a href="{% url 'torremolinosSport:instalacion_delete' pk=instalacion.id_instalacion %}">Eliminar</a>
+            </li>    
         {% empty %}
             <li>No hay instalaciones registradas.</li>
         {% endfor %}

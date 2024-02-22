@@ -15,10 +15,7 @@
         {% for deporte in deportes %}
             <li>{{ deporte.nombre }}
                 <a href="{% url 'torremolinosSport:deporte_update' pk=deporte.id_deporte %}">Editar</a>
-                <form action="{% url 'torremolinosSport:deporte_delete' pk=deporte.id_deporte %}" method="post" style="display: inline;">
-                    {% csrf_token %}
-                    <button type="submit">Eliminar</button>
-                </form>
+                <a href="{% url 'torremolinosSport:deporte_delete' pk=deporte.id_deporte %}">Eliminar</a>
             </li>
         {% empty %}
             <li>No hay deportes registrados.</li>

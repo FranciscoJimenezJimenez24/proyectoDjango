@@ -21,3 +21,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include("torremolinosSport.urls", namespace='torremolinosSport')), # Default landing page is Torre's index view
 ]
+    

@@ -35,21 +35,21 @@ class DeportesListView(generic.ListView):
 
 class DeporteCreateView(generic.CreateView):
     model = models.Deporte
-    fields = []
+    fields = '__all__'
     template_name = 'deporte_create.html'
-    success_url = "/inicio/deporte/"
+    success_url = "/deportes/"
 
 class DeporteUpdateView(generic.UpdateView):
     model = models.Deporte
-    fields = []
+    fields = '__all__'
     template_name = 'deporte_update.html'
-    success_url = "/inicio/deporte/"
+    success_url = "/deportes/"
 
 class DeporteDeleteView(generic.DeleteView):
     model = models.Deporte
     fields = []
     template_name = 'deporte_delete.html'
-    success_url = "/inicio/deporte/"
+    success_url = "/deportes/"
 
 class InstalacionesListView(generic.ListView):
     model = models.Instalacion
@@ -59,20 +59,20 @@ class InstalacionesListView(generic.ListView):
 class InstalacionCreateView(generic.CreateView):
     model = models.Instalacion
     template_name = 'instalacion_create.html'
-    fields = []
-    success_url = "/inicio/instalacion/"
+    fields = '__all__'
+    success_url = "/instalaciones/"
 
 class InstalacionUpdateView(generic.UpdateView):
     model = models.Instalacion
     template_name = 'instalacion_update.html'
-    fields = []
-    success_url = "/inicio/instalacion/"
+    fields = '__all__'
+    success_url = "/instalaciones/"
 
 class InstalacionDeleteView(generic.DeleteView):
     model = models.Instalacion
     template_name = 'instalacion_delete.html'
     fields = []
-    success_url = "/inicio/instalacion/"
+    success_url = "/instalaciones/"
 
 class EquiposListView(generic.ListView):
     model = models.Equipo

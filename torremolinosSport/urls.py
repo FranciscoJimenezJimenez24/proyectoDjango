@@ -25,8 +25,8 @@ urlpatterns = [
 
     path('deportes/', views.DeportesListView.as_view(), name='deportes'),
     path('deportes/create', views.DeporteCreateView.as_view(), name='deporte_create'),
-    path('deportes/<int:pk>/update/', views.DeportesListView.as_view(), name='deporte_update'),
-    path('deportes/<int:pk>/delete/', views.DeportesListView.as_view(), name='deporte_delete'),
+    path('deportes/<int:pk>/update/', views.DeporteUpdateView.as_view(), name='deporte_update'),
+    path('deportes/<int:pk>/delete/', views.DeporteDeleteView.as_view(), name='deporte_delete'),
 
     path('instalaciones/', views.InstalacionesListView.as_view(), name='instalaciones'),
     path('instalaciones/create', views.InstalacionCreateView.as_view(), name='instalacion_create'),
