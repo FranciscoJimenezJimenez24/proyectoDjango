@@ -3,17 +3,15 @@ from django.shortcuts import render
 from .models import Partido
 from django.views import generic
 from . import models
+from django.urls import reverse
+
 
 
 def inicio(request):
     # Obtener los últimos cinco partidos jugados
-    ultimos_partidos = Partido.objects.order_by('-fecha_hora').filter(
-        fecha_hora__lt=datetime.now())[:5]
-
+    ultimos_partidos = Partido.objects.order_by('-fecha_hora').filter(fecha_hora__lt=datetime.now())[:5]
     # Obtener los próximos cinco partidos por jugar
-    proximos_partidos = Partido.objects.order_by('fecha_hora').filter(
-        fecha_hora__gte=datetime.now())[:5]
-
+    proximos_partidos = Partido.objects.order_by('fecha_hora').filter(fecha_hora__gte=datetime.now())[:5]
     return render(request, 'inicio.html', {'ultimos_partidos': ultimos_partidos, 'proximos_partidos': proximos_partidos})
 
 def deportes(request):
@@ -82,24 +80,39 @@ class EquiposListView(generic.ListView):
 class EquipoDetailView(generic.DetailView):
     model = models.Equipo
     template_name = 'equipo_detalle.html'
-    success_url = "/inicio/equipo/"
+    success_url = "/equipo/"
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['id_equipo'] = self.object.id_equipo
+        return context
+
+    def get_success_url(self):
+        return reverse('equipo-detail', kwargs={'pk': self.kwargs['pk']})
 
 class EquipoCreateView(generic.CreateView):
     model = models.Equipo
-    fields = ['nombre', 'deporte', 'contacto', 'telefono', 'email']
+    fields = '__all__'
     template_name = 'equipo_create.html'
-    success_url = "/inicio/equipo/"
+    success_url = "/equipos/"
+
+    def form_valid(self, form):
+        form.instance.id_equipo_id = self.kwargs['id_equipo']
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('equipo-detail', kwargs={'pk': self.kwargs['id_equipo']})
 
 class EquipoUpdateView(generic.UpdateView):
     model = models.Equipo
-    fields = ['nombre', 'deporte', 'contacto', 'telefono', 'email']
+    fields = '__all__'
     template_name = 'equipo_update.html'
-    success_url = "/inicio/equipo/"
+    success_url = "/equipos/"
 
 class EquipoDeleteView(generic.DeleteView):
     model = models.Equipo
     template_name = 'equipo_delete.html'
-    success_url = "/inicio/equipo/"
+    success_url = "/equipos/"
 
 class JugadoresListView(generic.ListView):
     model = models.Jugador
@@ -108,25 +121,26 @@ class JugadoresListView(generic.ListView):
 
 class JugadorDetailView(generic.DetailView):
     model = models.Jugador
+    fields = '__all__'
     template_name = 'jugador_detalle.html'
-    context_object_name = '/inicio/jugador/'
+    context_object_name = 'jugador'
 
 class JugadorCreateView(generic.CreateView):
     model = models.Jugador
-    fields = ['nombre', 'apellido1', 'apellido2', 'equipo', 'dorsal', 'fecha_nacimiento', 'altura', 'peso', 'telefono']
+    fields = '__all__'
     template_name = 'jugador_create.html'
-    success_url = '/inicio/jugador/'
+    success_url = '/jugadores/'
 
 class JugadorUpdateView(generic.UpdateView):
     model = models.Jugador
-    fields = ['nombre', 'apellido1', 'apellido2', 'equipo', 'dorsal', 'fecha_nacimiento', 'altura', 'peso', 'telefono']
+    fields = '__all__'
     template_name = 'jugador_update.html'
-    success_url = '/inicio/jugador/'
+    success_url = '/jugadores/'
 
 class JugadorDeleteView(generic.DeleteView):
     model = models.Jugador
     template_name = 'jugador_delete.html'
-    success_url = '/inicio/jugador/'
+    success_url = '/jugadores/'
 
 class PartidosListView(generic.ListView):
     model = models.Partido
@@ -135,14 +149,15 @@ class PartidosListView(generic.ListView):
 
 class PartidoDetailView(generic.DetailView):
     model = models.Partido
+    fields = '__all__'
     template_name = 'partido_detalle.html'
-    success_url = '/inicio/partido/'
+    success_url = '/partidos/'
 
 class PartidoCreateView(generic.CreateView):
     model = models.Partido
-    fields = ['id_deporte', 'fecha_hora', 'id_instalacion', 'id_local', 'id_visitante', 'puntos_local', 'puntos_visitante', 'observaciones']
+    fields = '__all__'
     template_name = 'partido_create.html'
-    success_url = '/inicio/partido/'
+    success_url = '/partidos/'
 
     def form_valid(self, form):
         if form.cleaned_data['id_local'] == form.cleaned_data['id_visitante']:
@@ -152,9 +167,9 @@ class PartidoCreateView(generic.CreateView):
 
 class PartidoUpdateView(generic.UpdateView):
     model = models.Partido
-    fields = ['id_deporte', 'fecha_hora', 'id_instalacion', 'id_local', 'id_visitante', 'puntos_local', 'puntos_visitante', 'observaciones']
+    fields = '__all__'
     template_name = 'partido_update.html'
-    success_url = '/inicio/partido/'
+    success_url = '/partidos/'
 
     def form_valid(self, form):
         if form.cleaned_data['id_local'] == form.cleaned_data['id_visitante']:
@@ -166,4 +181,4 @@ class PartidoDeleteView(generic.DeleteView):
     model = models.Partido
     fields= []
     template_name = 'partido_delete.html'
-    success_url = '/inicio/partido/'
+    success_url = '/partidos/'

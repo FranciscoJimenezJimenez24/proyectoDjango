@@ -7,6 +7,13 @@
 </head>
 <body>
     <h1>Detalle del Partido: {{ partido.fecha_hora }}</h1>
-    <!-- Mostrar toda la información del partido aquí -->
+    <p><strong>Deporte:</strong> {{ partido.id_deporte }}</p>
+    <p><strong>Fecha y Hora:</strong> {{ partido.fecha_hora }}</p>
+    <p><strong>Instalación:</strong> {{ partido.id_instalacion }}</p>
+    <p><strong>Equipo Local:</strong> {{ partido.id_local.nombre }}</p>
+    <p><strong>Equipo Visitante:</strong> {{ partido.id_visitante.nombre }}</p>
+    <p><strong>Puntos del Equipo Local:</strong> {{ partido.puntos_local }}</p>
+    <p><strong>Puntos del Equipo Visitante:</strong> {{ partido.puntos_visitante }}</p>
+    <p><strong>Observaciones:</strong> {{ partido.observaciones }}</p>
 </body>
 </html>

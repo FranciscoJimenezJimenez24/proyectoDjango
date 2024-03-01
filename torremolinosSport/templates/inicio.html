@@ -3,37 +3,61 @@
 <html>
 <head>
     <title>Página de inicio</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-    <h1>Título de la página de inicio</h1>
-    
-    <!-- Menú de navegación -->
-    <ul>
-        <li><a href="{% url 'torremolinosSport:deportes' %}">Deportes</a></li>
-        <li><a href="{% url 'torremolinosSport:instalaciones' %}">Instalaciones</a></li>
-        <li><a href="{% url 'torremolinosSport:equipos' %}">Equipos</a></li>
-        <li><a href="{% url 'torremolinosSport:jugadores' %}">Jugadores</a></li>
-        <li><a href="{% url 'torremolinosSport:partidos' %}">Partidos</a></li>
-    </ul>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'torremolinosSport:deportes' %}">Deportes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'torremolinosSport:instalaciones' %}">Instalaciones</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'torremolinosSport:equipos' %}">Equipos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'torremolinosSport:jugadores' %}">Jugadores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'torremolinosSport:partidos' %}">Partidos</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-    <!-- Imagen de deporte -->
-    <img src="{% static 'img/deporte.jpg' %}" alt="Imagen de deporte">
+    <div class="container mt-4">
+        <h1 class="mb-4">Título de la página de inicio</h1>
+        
+        <!-- Imagen de deporte -->
+        <img src="{% static 'img/deporte.jpg' %}" alt="Imagen de deporte" class="img-fluid rounded mb-4">
 
-    <!-- Listado de los últimos cinco partidos jugados -->
-    <h2>Últimos partidos jugados</h2>
-    <ul>
-        {% for partido in ultimos_partidos %}
-            <li>{{ partido }}</li>
-        {% endfor %}
-    </ul>
+        <!-- Listado de los últimos cinco partidos jugados -->
+        <h2>Últimos partidos jugados</h2>
+        <ul class="list-group">
+            {% for partido in ultimos_partidos %}
+                <li class="list-group-item">{{ partido }}</li>
+            {% endfor %}
+        </ul>
 
-    <!-- Listado de los próximos cinco partidos por jugar -->
-    <h2>Próximos partidos por jugar</h2>
-    <ul>
-        {% for partido in proximos_partidos %}
-            <li>{{ partido }}</li>
-        {% endfor %}
-    </ul>
+        <!-- Listado de los próximos cinco partidos por jugar -->
+        <h2 class="mt-4">Próximos partidos por jugar</h2>
+        <ul class="list-group">
+            {% for partido in proximos_partidos %}
+                <li class="list-group-item">{{ partido }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <footer class="mt-4 py-3 bg-light text-center">
+        {% include "nombre.html" with nombre="Francisco Jiménez" %}
+    </footer>
+
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>

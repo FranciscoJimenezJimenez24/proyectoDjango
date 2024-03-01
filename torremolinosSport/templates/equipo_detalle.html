@@ -7,5 +7,32 @@
 </head>
 <body>
     <h1>Detalles del Equipo: {{ equipo.nombre }}</h1>
+    <p>Equipación Principal: {{ equipo.equipacion_principal }}</p>
+    <p>Equipación Suplente: {{ equipo.equipacion_suplente }}</p>
+    <p>Contacto: {{ equipo.contacto }}</p>
+    <p>Teléfono: {{ equipo.telefono }}</p>
+    <p>Email: {{ equipo.email }}</p>
+
+    <h2>Jugadores del Equipo</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Dorsal</th>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for jugador in equipo.jugador_set.all|dictsort:"dorsal" %}
+                <tr>
+                    <td>{{ jugador.dorsal }}</td>
+                    <td>{{ jugador.nombre }}</td>
+                    <td>{{ jugador.apellido1 }} {{ jugador.apellido2 }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{% url 'torremolinosSport:jugador_create' pk=equipo.id_equipo %}">Añadir Nuevo Jugador</a>
 </body>
 </html>

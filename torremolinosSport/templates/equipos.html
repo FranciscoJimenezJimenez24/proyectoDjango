@@ -11,12 +11,9 @@
     <ul>
         {% for equipo in equipos %}
             <li>
-                <a href="{% url 'torremolinosSport:equipo_detalle' pk=equipo.id_equipo %}">{{ equipo.nombre }}</a> - {{ equipo.deporte }} - {{ equipo.contacto }}
+                <a href="{% url 'torremolinosSport:equipo_detalle' pk=equipo.id_equipo %}">{{ equipo.nombre }}</a> - {{ equipo.id_deporte }} - {{ equipo.contacto }}
                 <a href="{% url 'torremolinosSport:equipo_update' pk=equipo.id_equipo %}">Editar</a>
-                <form action="{% url 'torremolinosSport:equipo_delete' pk=equipo.id_equipo %}" method="post" style="display: inline;">
-                    {% csrf_token %}
-                    <button type="submit">Eliminar</button>
-                </form>
+                <a href="{% url 'torremolinosSport:equipo_delete' pk=equipo.id_equipo %}">Eliminar</a>
             </li>
         {% empty %}
             <li>No hay equipos registrados.</li>
@@ -25,4 +22,7 @@
 
     <a href="{% url 'torremolinosSport:equipo_create' %}">Añadir Equipo</a>
 </body>
+<footer>
+    {% include "nombre.html" with nombre="Francisco Jiménez" %}
+</footer>
 </html>
