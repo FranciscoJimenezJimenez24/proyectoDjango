@@ -21,7 +21,7 @@ app_name="torremolinosSport"
 
 
 urlpatterns = [
-    path('',views.inicio),
+    path('',views.inicio, name="inicio"),
 
     path('deportes/', views.DeportesListView.as_view(), name='deportes'),
     path('deportes/create', views.DeporteCreateView.as_view(), name='deporte_create'),

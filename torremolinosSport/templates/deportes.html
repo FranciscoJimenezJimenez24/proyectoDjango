@@ -1,28 +1,43 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listado de Deportes</title>
-</head>
-<body>
-    <h1>Listado de Deportes</h1>
+{% extends "base.html" %}
+{% block contenido %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card bg-dark text-white">
+                <div class="card-body">
+                    <a href="{% url 'torremolinosSport:inicio' %}" class="btn btn-primary">Ir a inicio</a>
+                    <h1 style="text-align: center;">Listado de Deportes</h1>
 
-    <!-- Enlace para añadir un nuevo deporte -->
-    <a href="{% url 'torremolinosSport:deporte_create' %}">Añadir Deporte</a>
-
-    <ul>
-        {% for deporte in deportes %}
-            <li>{{ deporte.nombre }}
-                <a href="{% url 'torremolinosSport:deporte_update' pk=deporte.id_deporte %}">Editar</a>
-                <a href="{% url 'torremolinosSport:deporte_delete' pk=deporte.id_deporte %}">Eliminar</a>
-            </li>
-        {% empty %}
-            <li>No hay deportes registrados.</li>
-        {% endfor %}
-    </ul>
-</body>
-<footer>
-    {% include "nombre.html" with nombre="Francisco Jiménez" %}
-</footer>
-</html>
+                    <!-- Enlace para añadir un nuevo deporte -->
+                    <a href="{% url 'torremolinosSport:deporte_create' %}" class="btn btn-warning btn-lg mb-3" style="float: right;">Añadir Deporte</a>
+                    <table class="table table-striped text-white">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for deporte in deportes %}
+                                <tr>
+                                    <td>{{ deporte.id_deporte }}</td>
+                                    <td>{{ deporte.nombre }}</td>
+                                    <td>
+                                        <a href="{% url 'torremolinosSport:deporte_update' pk=deporte.id_deporte %}" class="btn btn-warning">Editar</a>
+                                        <a href="{% url 'torremolinosSport:deporte_delete' pk=deporte.id_deporte %}" class="btn btn-warning">Eliminar</a>
+                                    </td>
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <td colspan="3">No hay deportes registrados.</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

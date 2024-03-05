@@ -1,29 +1,48 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listado de Instalaciones</title>
-</head>
-<body>
-    <h1>Listado de Instalaciones</h1>
+{% extends "base.html" %}
+{% block contenido %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card bg-dark text-white">
+                <div class="card-body">
+                    <a href="{% url 'torremolinosSport:inicio' %}" class="btn btn-primary">Ir a inicio</a>
+                    <h1 style="text-align: center;">Listado de Instalaciones</h1>
 
-    <!-- Enlace para añadir una nueva instalación -->
-    <a href="{% url 'torremolinosSport:instalacion_create' %}">Añadir Instalación</a>
-
-    <ul>
-        {% for instalacion in instalaciones %}
-            <li>{{ instalacion.id_instalacion }}
-                {{ instalacion.nombre }} 
-                {{ instalacion.direccion }} 
-                {{ instalacion.iluminacion }} 
-                {{ instalacion.cubierta }} 
-                <a href="{% url 'torremolinosSport:instalacion_update' pk=instalacion.id_instalacion %}">Editar</a>
-                <a href="{% url 'torremolinosSport:instalacion_delete' pk=instalacion.id_instalacion %}">Eliminar</a>
-            </li>    
-        {% empty %}
-            <li>No hay instalaciones registradas.</li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+                    <!-- Enlace para añadir un nuevo deporte -->
+                    <a href="{% url 'torremolinosSport:instalacion_create' %}" class="btn btn-warning btn-lg mb-3" style="float: right;">Añadir Instalación</a>
+                    <table class="table table-striped text-white">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Instalación</th>
+                                <th>Dirección</th>
+                                <th>Iluminación</th>
+                                <th>Cubierta</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for instalacion in instalaciones %}
+                                <tr>
+                                    <td>{{ instalacion.id_instalacion }}</td>
+                                    <td>{{ instalacion.nombre }}</td>
+                                    <td>{{ instalacion.direccion }}</td>
+                                    <td>{% if instalacion.iluminacion %}Si{% else %}No {% endif %}</td>
+                                    <td>{% if instalacion.cubierta %}Si{% else %}No {% endif %}</td>
+                                    <td>
+                                        <a href="{% url 'torremolinosSport:instalacion_update' pk=instalacion.id_instalacion %}" class="btn btn-warning">Editar</a>
+                                        <a href="{% url 'torremolinosSport:instalacion_delete' pk=instalacion.id_instalacion %}" class="btn btn-warning">Eliminar</a>
+                                    </td>
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <td colspan="6">No hay instalaciones registradas.</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

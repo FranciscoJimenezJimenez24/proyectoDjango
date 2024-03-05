@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% extends "base.html" %}
 {% load static %}
 <html>
 <head>
@@ -6,7 +7,9 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
 </head>
+{% block contenido %}
 <body>
+    
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -54,10 +57,7 @@
         </ul>
     </div>
 
-    <footer class="mt-4 py-3 bg-light text-center">
-        {% include "nombre.html" with nombre="Francisco Jiménez" %}
-    </footer>
-
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 </body>
+{% endblock %}
 </html>

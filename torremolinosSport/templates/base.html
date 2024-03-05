@@ -9,9 +9,14 @@
     </head>
 
     <body>
-        {% block cuerpo %}{% endblock %}
+        {% block cuerpo %}
+            <div>
+                {% block contenido %}
+                {% endblock %}
+            </div>
+            <footer class="py-3" style="background-color: black; color: rgb(245, 197, 24); text-align: center;">
+                {% include "nombre.html" with nombre="Francisco Jiménez" %}
+            </footer>
+        {% endblock %}
     </body>
-
-
-
 </html>
