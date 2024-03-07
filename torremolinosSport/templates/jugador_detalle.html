@@ -1,3 +1,5 @@
+{% extends "base.html" %}
+{% block contenido %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -6,12 +8,24 @@
     <title>Detalle del Jugador</title>
 </head>
 <body>
-    <h1>Detalle del Jugador: {{ jugador.nombre }} {{ jugador.apellido1 }} {{ jugador.apellido2 }}</h1>
-    <p><strong>Dorsal:</strong> {{ jugador.dorsal }}</p>
-    <p><strong>Fecha de Nacimiento:</strong> {{ jugador.fecha_nacimiento }}</p>
-    <p><strong>Altura:</strong> {{ jugador.altura }}</p>
-    <p><strong>Peso:</strong> {{ jugador.peso }}</p>
-    <p><strong>Teléfono:</strong> {{ jugador.telefono }}</p>
-    <button onclick="window.history.back()" class="btn btn-secondary mt-2">Volver atrás</button>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card bg-dark text-white">
+        <div class="card-body">
+          <h1>Detalle del Jugador</h1>
+          <p><strong>Jugador:</strong> {{ jugador.nombre }} {{ jugador.apellido1 }} {{ jugador.apellido2 }}</p>
+          <p><strong>Dorsal:</strong> {{ jugador.dorsal }}</p>
+          <p><strong>Fecha de Nacimiento:</strong> {{ jugador.fecha_nacimiento }}</p>
+          <p><strong>Altura:</strong> {{ jugador.altura }}</p>
+          <p><strong>Peso:</strong> {{ jugador.peso }}</p>
+          <p><strong>Teléfono:</strong> {{ jugador.telefono }}</p>
+          <button onclick="window.history.back()" class="btn btn-secondary mt-2">Volver atrás</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
+{% endblock %}

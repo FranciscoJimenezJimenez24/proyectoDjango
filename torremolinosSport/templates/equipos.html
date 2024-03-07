@@ -1,28 +1,50 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listado de Equipos</title>
-</head>
-<body>
-    <h1>Listado de Equipos</h1>
+{% extends "base.html" %}
+{% block contenido %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card bg-dark text-white">
+                <div class="card-body">
+                    <a href="{% url 'torremolinosSport:inicio' %}" class="btn btn-primary">Ir a inicio</a>
+                    <h1 style="text-align: center;">Listado de Equipos</h1>
 
-    <ul>
-        {% for equipo in equipos %}
-            <li>
-                <a href="{% url 'torremolinosSport:equipo_detalle' pk=equipo.id_equipo %}">{{ equipo.nombre }}</a> - {{ equipo.id_deporte }} - {{ equipo.contacto }}
-                <a href="{% url 'torremolinosSport:equipo_update' pk=equipo.id_equipo %}">Editar</a>
-                <a href="{% url 'torremolinosSport:equipo_delete' pk=equipo.id_equipo %}">Eliminar</a>
-            </li>
-        {% empty %}
-            <li>No hay equipos registrados.</li>
-        {% endfor %}
-    </ul>
-
-    <a href="{% url 'torremolinosSport:equipo_create' %}">Añadir Equipo</a>
-</body>
-<footer>
-    {% include "nombre.html" with nombre="Francisco Jiménez" %}
-</footer>
-</html>
+                    <!-- Enlace para añadir un nuevo deporte -->
+                    <a href="{% url 'torremolinosSport:equipo_create' %}" class="btn btn-warning btn-lg mb-3" style="float: right;">Añadir Instalación</a>
+                    <table class="table table-striped text-white">
+                        <thead>
+                            <tr>
+                                <th>Equipo</th>
+                                <th>Teléfono</th>
+                                <th>Correo electrónico</th>
+                                <th>Equipación principal</th>
+                                <th>Equipación suplente</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for equipo in equipos %}
+                                <tr>
+                                    <td>{{ equipo.nombre }}</td>
+                                    <td>{{ equipo.telefono }}</td>
+                                    <td>{{ equipo.email }}</td>
+                                    <td>{{ equipo.equipacion_principal }}</td>
+                                    <td>{{ equipo.equipacion_suplente }}</td>
+                                    <td>
+                                        <a href="{% url 'torremolinosSport:equipo_detalle' pk=equipo.id_equipo %}" class="btn btn-warning">Detalle</a>
+                                        <a href="{% url 'torremolinosSport:equipo_update' pk=equipo.id_equipo %}" class="btn btn-warning">Editar</a>
+                                        <a href="{% url 'torremolinosSport:equipo_delete' pk=equipo.id_equipo %}" class="btn btn-warning">Eliminar</a>
+                                    </td>
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <td colspan="6">No hay equipos registrados.</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

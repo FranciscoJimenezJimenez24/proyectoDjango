@@ -1,29 +1,52 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listado de Jugadores</title>
-</head>
-<body>
-    <h1>Listado de Jugadores</h1>
+{% extends "base.html" %}
+{% block contenido %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card bg-dark text-white">
+                <div class="card-body">
+                    <a href="{% url 'torremolinosSport:inicio' %}" class="btn btn-primary">Ir a inicio</a>
+                    <h1 style="text-align: center;">Listado de Jugadores</h1>
 
-    <ul>
-        {% for jugador in jugadores %}
-            <li>
-                {{ jugador.nombre }} {{ jugador.apellido1 }} {{ jugador.apellido2 }} - {{ jugador.id_equipo }} - {{ jugador.telefono }}
-                <a href="{% url 'torremolinosSport:jugador_detalle' pk=jugador.pk %}">Detalle</a>
-                <a href="{% url 'torremolinosSport:jugador_update' pk=jugador.pk %}">Editar</a>
-                <a href="{% url 'torremolinosSport:jugador_delete' pk=jugador.pk %}">Borrar</a>
-            </li>
-        {% empty %}
-            <li>No hay jugadores registrados.</li>
-        {% endfor %}
-    </ul>
-
-    <a href="{% url 'torremolinosSport:jugador_create' %}">Añadir Jugador</a>
-</body>
-<footer>
-    {% include "nombre.html" with nombre="Francisco Jiménez" %}
-</footer>
-</html>
+                    <!-- Enlace para añadir un nuevo deporte -->
+                    <a href="{% url 'torremolinosSport:jugador_create' %}" class="btn btn-warning btn-lg mb-3" style="float: right;">Añadir Equipo</a>
+                    <table class="table table-striped text-white">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Primer apellido</th>
+                                <th>Segundo apellido</th>
+                                <th>Equipo</th>
+                                <th>Fecha de nacimiento</th>
+                                <th>Teléfono</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for jugador in jugadores %}
+                                <tr>
+                                    <td>{{ jugador.nombre }}</td>
+                                    <td>{{ jugador.apellido1 }}</td>
+                                    <td>{{ jugador.apellido2 }}</td>
+                                    <td>{{ jugador.id_equipo }}</td>
+                                    <td>{{ jugador.fecha_nacimiento }}</td>
+                                    <td>{{ jugador.telefono }}</td>
+                                    <td>
+                                        <a href="{% url 'torremolinosSport:jugador_detalle' pk=jugador.id_jugador %}" class="btn btn-warning">Detalle</a>
+                                        <a href="{% url 'torremolinosSport:jugador_update' pk=jugador.id_jugador %}" class="btn btn-warning">Editar</a>
+                                        <a href="{% url 'torremolinosSport:jugador_delete' pk=jugador.id_jugador %}" class="btn btn-warning">Eliminar</a>
+                                    </td>
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <td colspan="6">No hay jugadores registrados.</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

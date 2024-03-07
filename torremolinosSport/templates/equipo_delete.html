@@ -1,9 +1,19 @@
-{% block cuerpo %}
-<form method="POST">
-{% csrf_token %}
-<p>¿Desea eliminar a '{{ object.nombre }}'?</p>
-<input type="Submit" value="Borrar" />
-<a href="{% url 'torremolinosSport:equipos' %}"><input
-    type="button" value="Cancelar"></a>
-</form>
+{% extends "base.html" %}
+{% block contenido %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card bg-dark text-white">
+                <div class="card-body">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <p>¿Desea eliminar a '{{ object.nombre }}'?</p>
+                        <button type="submit" class="btn btn-danger">Borrar</button>
+                        <a href="{% url 'torremolinosSport:equipos' %}" class="btn btn-secondary">Cancelar</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
